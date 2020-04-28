@@ -13,7 +13,6 @@ export default class MovieCard extends React.Component {
           borderRadius: "10px",
           boxShadow: "2px 3px 10px #9E9E9E",
         }}
-        key={movie.id}
       >
         <Card.Img
           variant="top"
