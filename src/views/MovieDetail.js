@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { fetchMovie } from "../store/actions";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import "../styles/percentage.css";
 
 const MovieDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const movie = useSelector((state) => state.movie);
+  const loading = useSelector((state) => state.movieLoading);
+  const error = useSelector((state) => state.movieError);
   console.log("satu movie: ", movie);
-  const url = `https://api.themoviedb.org/3/movie/${id}?api_key=d7cd318e78bcc8e62adff521f04d307b`;
+  console.log("1.", loading);
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(url)
-      .then(({ data }) => dispatch({ type: "SET_MOVIE", payload: data }))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
-  }, [dispatch]);
+    dispatch(fetchMovie(id));
+  }, [dispatch, id]);
 
   if (loading) return <Loading />;
   if (error) return <p>Error...</p>;
@@ -42,12 +37,7 @@ const MovieDetail = () => {
         }}
       >
         <Row style={{ height: "89vh" }}>
-          <Col
-            className="align-self-center"
-            xs
-            lg="4"
-            // style={{ backgroundColor: "yellow" }}
-          >
+          <Col className="align-self-center" xs lg="4">
             <Image
               src={"https://image.tmdb.org/t/p/w500" + movie.poster_path}
               alt={movie.title}
@@ -88,7 +78,6 @@ const MovieDetail = () => {
           </Col>
         </Row>
       </Container>
-      {/* <h1 style={{ background: "white" }}>ID:{id}</h1> */}
     </>
   );
 };

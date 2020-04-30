@@ -3,8 +3,12 @@ import Navigation from "./components/Navigation";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routers from "./routes/Routers";
 import DynamicTicker from "./components/DynamicTicker";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
+  toast.configure();
+
   return (
     <>
       <Router>

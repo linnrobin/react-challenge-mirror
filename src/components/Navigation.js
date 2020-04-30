@@ -11,7 +11,7 @@ function Navigation() {
         </Link>
       </Navbar.Brand>
       <Nav className="mr-auto">
-        {/* <Link to="/">Home</Link> |<Link to="/movies/545609">545609</Link> */}
+        <Link to="/favorites">My Favorites</Link>
       </Nav>
       <Form inline>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />

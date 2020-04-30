@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const GetMovies = () => {
   const movies = useSelector((state) => state.movies);
-  console.log("dynamic", movies);
 
   let moviesStr = "";
   for (let i = 0; i < movies.length; i++) {

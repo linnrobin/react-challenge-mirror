@@ -1,19 +1,7 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import reducer from "./reducers";
+import thunk from "redux-thunk";
 
-const initialState = {
-  movies: [],
-  movie: {},
-};
-
-function reducer(state = initialState, action) {
-  if (action.type === "SET_MOVIES") {
-    return { ...state, movies: action.payload };
-  } else if (action.type === "SET_MOVIE") {
-    return { ...state, movie: action.payload };
-  }
-  return state;
-}
-
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
