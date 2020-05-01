@@ -8,6 +8,7 @@ import {
   SET_FAVORITES,
   SET_FAVORITES_LOADING,
   SET_FAVORITES_ERROR,
+  SET_SEARCH_RESULTS,
 } from "../actions";
 
 const initialState = {
@@ -20,6 +21,7 @@ const initialState = {
   favorites: [],
   favoritesLoading: false,
   favoritesError: null,
+  searchResults: [],
 };
 
 function reducer(state = initialState, action) {
@@ -58,6 +60,10 @@ function reducer(state = initialState, action) {
 
   if (type === SET_FAVORITES_ERROR) {
     return { ...state, favoritesError: payload };
+  }
+
+  if (type === SET_SEARCH_RESULTS) {
+    return { ...state, searchResults: payload };
   }
 
   return state;

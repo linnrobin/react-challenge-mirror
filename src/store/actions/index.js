@@ -9,6 +9,7 @@ export const SET_MOVIE_ERROR = "SET_MOVIE_ERROR";
 export const SET_FAVORITES = "SET_FAVORITES";
 export const SET_FAVORITES_LOADING = "SET_FAVORITES_LOADING";
 export const SET_FAVORITES_ERROR = "SET_FAVORITES_ERROR";
+export const SET_SEARCH_RESULTS = "SET_SEARCH_RESULTS";
 
 export const setMovies = (data) => {
   return { type: SET_MOVIES, payload: data.results };
@@ -44,6 +45,10 @@ export const setFavoritesLoading = (data) => {
 
 export const setFavoritesError = (data) => {
   return { type: SET_FAVORITES_ERROR, payload: data };
+};
+
+export const setSearchResults = (data) => {
+  return { type: SET_SEARCH_RESULTS, payload: data };
 };
 
 export const fetchMovies = () => {
@@ -82,5 +87,11 @@ export const fetchFavorite = (id) => {
       .then(({ data }) => dispatch(setFavorites(data)))
       .catch((err) => dispatch(setFavoritesError(err)))
       .finally(() => dispatch(setFavoritesLoading(false)));
+  };
+};
+
+export const fetchSearchResults = (results) => {
+  return (dispatch) => {
+    dispatch(setSearchResults(results));
   };
 };

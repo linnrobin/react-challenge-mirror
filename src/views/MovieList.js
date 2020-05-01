@@ -7,7 +7,7 @@ import { CardColumns } from "react-bootstrap";
 
 function MovieList() {
   const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movies);
+  const movies = useSelector((state) => state.searchResults);
   const loading = useSelector((state) => state.moviesLoading);
   const error = useSelector((state) => state.moviesError);
   console.log("ini movies: ", movies);
@@ -21,6 +21,16 @@ function MovieList() {
   if (loading) return <Loading />;
   if (error) return <p>Error...</p>;
 
+  function NoResults() {
+    if (movies.length === 0) {
+      return <h1 style={{ color: "white" }}>No Search Result</h1>;
+    } else {
+      return movies.map((movie) => (
+        <MovieCard movie={movie} key={movie.id} from={"MovieList"} />
+      ));
+    }
+  }
+
   return (
     <CardColumns
       className="overflow-auto"
@@ -32,9 +42,7 @@ function MovieList() {
         columnCount: "4",
       }}
     >
-      {movies.map((movie) => (
-        <MovieCard movie={movie} key={movie.id} from={"MovieList"} />
-      ))}
+      <NoResults />
     </CardColumns>
   );
 }
